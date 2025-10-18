@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi amada Loreidy ❤️</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            font-family: 'Georgia', serif;
+            color: #4a148c;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3em;
+            color: #d81b60;
+        }
+
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .local-video-container video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .video-player {
+            margin-top: 30px;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .poem-container {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-style: italic;
+            white-space: pre-line;
+            text-align: left;
+            min-height: 150px;
+            position: relative;
+        }
+
+        #poem-text {
+            line-height: 1.6;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Eres una gran mujer 💗</h1>
+        </header>
+
+        <div class="media-container">
+            <div class="local-video-container">
+                <video controls autoplay muted loop> 
+                    <source src="https://github.com/jesuxzx/No-se/raw/fd446b6f63dda1bd921f4e5975b9f730247869e7/VID-20251013-WA0097.mp4" type="video/mp4">
+                    Tu navegador no soporta el tag de video.
+                </video>
+            </div>
+        </div>
+
+        <div class="video-player">
+            <div id="youtube-player"></div>
+        </div>
+
+        <div class="poem-container">
+            <p id="poem-text"></p>
+        </div>
+    </div>
+    
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        
+        // ID del video de YouTube actualizado
+        const videoId = 'A1MdThqGarI'; 
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '360',
+                width: '640',
+                videoId: videoId, 
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0
+                },
+                events: {
+                    // El poema comienza a escribirse aquí (onPlayerReady)
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // SOLUCIÓN: Llama a typePoem tan pronto como el reproductor esté listo.
+            typePoem(); 
+        }
+
+        function onPlayerStateChange(event) {
+            // Esta función se deja vacía ya que la escritura se inicia en onPlayerReady
+        }
+        
+        const poemText = document.getElementById('poem-text');
+        const poem = `
+Quiero tomar un momento para recordarte una verdad esencial que a veces olvidamos: tu valor es incalculable y cada uno de tus sentimientos es válido y merece ser escuchado.
+
+Eres una mujer increíble y eso no tiene nada que ver con lo que haces sino con quién eres. Eres suficiente eres valiosa y eres digna de amor y respeto exactamente como eres ahora.
+
+Nunca dejes que nadie minimice lo que sientes. Tus emociones sean alegría o tristeza son el mapa de tu alma y una parte vital de tu fortaleza. Siente sin culpa porque lo que sientes vale mucho. Y por encima de todo tú vales oro.
+
+Sigue brillando con esa autenticidad que te hace tan especial. Eres grandiosa y un verdadero regalo para el mundo.
+`; 
+        let charIndex = 0;
+        const typingSpeed = 90;
+
+        function typePoem() {
+            if (charIndex < poem.length) {
+                if (poem.charAt(charIndex) === '\n') {
+                    poemText.innerHTML += '<br>';
+                } else {
+                    poemText.innerHTML += poem.charAt(charIndex);
+                }
+                charIndex++;
+                setTimeout(typePoem, typingSpeed);
+            }
+        }
+    </script>
+</body>
+</html>
